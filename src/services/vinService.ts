@@ -1,5 +1,5 @@
 // import { get } from "../utils/https"
-import { VIN_LENGTH } from "../../constants"
+import { VIN_LENGTH, INVALID_VIN_MESSAGE } from "../../constants"
 
 const invalidChars = new RegExp(/[IOQ]/, "g")
 
@@ -9,7 +9,7 @@ export const filter = (vin: string) =>
         .replace(invalidChars, "")
         .slice(0, VIN_LENGTH)
 
-export const validate = (_vin: string): string => null
+export const validate = (_vin: string): string => (_vin.length === VIN_LENGTH ? "" : INVALID_VIN_MESSAGE)
 
 export const convert = (_res: VinCheckResponse): CarInfo => null
 
