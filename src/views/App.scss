@@ -23,12 +23,13 @@ button {
     border-radius: 5px;
     color: white;
     cursor: pointer;
+    display: -webkit-inline-box;
     font-family: 'Rubik', sans-serif;
     font-size: 28px;
     font-weight: lighter;
     height: 62px;
     transition: 200ms all linear;
-    width: 75%;
+    width: 448px;
 }
 
 button:disabled {

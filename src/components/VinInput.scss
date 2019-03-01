@@ -1,16 +1,17 @@
 $color: #ff9393;
 .VinInput {
-    display: inline-flex;
+    display: block;
     flex-direction: column;
     margin-bottom: 25px;
     text-align: center;
-    width: 75%;
     input {
         background-color: #f1f1f1;
         border: none;
         border-radius: 5px;
         caret-color: #1056ad;
-        font-size: 50px;
+        padding: 5px;
+        font-size: 36px;
+        height: 45px;
     }
     &__Error {
         color: $color;
