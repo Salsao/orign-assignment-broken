@@ -1,12 +1,26 @@
 $color: #ff9393;
 .VinInput {
     display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    width: 100%;
     input {
+        background-color: #f1f1f1;
+        border: none;
         border-radius: 5px;
         caret-color: #1056ad;
+        font-size: 29px;
     }
     &__Error {
         color: $color;
+        font-size: 15px;
+        margin-top: 2px;
+        text-align: center;
+    }
+    &--invalid {
+      input {
+        border: 1px solid $color;
+      }
     }
 }
 
