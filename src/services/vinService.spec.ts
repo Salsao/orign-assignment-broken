@@ -1,5 +1,6 @@
-import { convert, filter } from "./vinService"
+import { convert, filter, validate, apiCheck } from "./vinService"
 import { vinCheckResponseFixture, vinResultEntryFixture } from "../test/fixtures"
+import { INVALID_VIN_MESSAGE } from "../../constants"
 
 describe("Vin Service", () => {
     describe.skip("Response converter", () => {
@@ -51,5 +52,26 @@ describe("Vin Service", () => {
         it("disallows IOQ", () => expect(filter("IOQabc")).toEqual("ABC"))
         it("disallows ioq", () => expect(filter("ioqabc")).toEqual("ABC"))
         it("trims to first 17 chars", () => expect(filter("SHHFN23607U002758abc")).toEqual("SHHFN23607U002758"))
+    })
+
+    describe("Vin validate", () => {
+        it("exactly 17 chars", () => expect(validate("exact17characters")).toEqual(""))
+        it("less than 17 chars", () => expect(validate("lessthan17")).toEqual(`${INVALID_VIN_MESSAGE}`))
+        it("more than 17 chars", () => expect(validate("morethan17characters")).toEqual(`${INVALID_VIN_MESSAGE}`))
+        it("empty", () => expect(validate("")).toEqual(`${INVALID_VIN_MESSAGE}`))
+    })
+
+    describe("Vin apiCheck", () => {
+        it("return parsed result", async () => {
+            const vin = "4T1SV22E4KU162526"
+            const result = await apiCheck(vin)
+            expect(result).toEqual({
+                make: "TOYOTA",
+                model: "Camry",
+                trim: null,
+                vehicleType: "PASSENGER CAR",
+                year: "1989"
+            })
+        })
     })
 })
